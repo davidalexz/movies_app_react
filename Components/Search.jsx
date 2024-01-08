@@ -9,18 +9,18 @@ export default function SearchList({ searchMovieData }) {
         if (movieName) {
             try {
                 const res = await fetch(SEARCHAPI + movieName);
-                if (res.ok) {
-                    const data = await res.json();
-                    searchMovieData(data);
-                    setError(null);
-                    setMovieName('');
-                } else {
+                const data = await res.json();
+                if ((data.Response === 'False') & (data.Error === 'Movie not found!')) {
                     searchMovieData(null);
                     setMovieName('');
                     setError('Movie not found');
+                } else {
+                    searchMovieData(data);
+                    setError(null);
+                    setMovieName('');
                 }
             } catch (err) {
-                console.error(err);
+                // console.error(err);
                 setError('An error occurred, try again later.');
             }
         }
@@ -30,7 +30,6 @@ export default function SearchList({ searchMovieData }) {
         if (e.key === 'Enter') {
             fetchMovie();
             searchMovieData(null);
-            setError(null);
         }
     };
 
@@ -50,7 +49,7 @@ export default function SearchList({ searchMovieData }) {
                 type="text"
                 placeholder="Search movie"
             />
-            {error && <small className="error">{error}</small>}
+            <small className="error">{error}</small>
         </>
     );
 }
