@@ -10,7 +10,7 @@ export default function App() {
     return (
         <>
             <Search searchMovieData={setNewData} />
-            <Movies />
+            <Movies searchMovieData={newData} />
         </>
     );
 }

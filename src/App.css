@@ -14,14 +14,16 @@ body {
     flex-wrap: wrap;
     justify-content: center;
 }
-.movie_card {
+.movie_card,
+.searchMovies {
     width: 250px;
     margin: 1rem;
     display: flex;
     flex-direction: column;
 }
 
-img.movie_poster {
+.movie_poster,
+.search_poster {
     width: 100%;
     border-top-left-radius: 5px;
     border-top-right-radius: 5px;
@@ -44,6 +46,7 @@ input.search_movie {
 
 input.search_movie:focus {
     outline: none;
+    background-color: bisque;
 }
 
 input.search_movie::placeholder {
