@@ -22,8 +22,6 @@ export default function Movies({ searchMovieData }) {
         searchMovieList = searchMovieData.Search.filter((movie) => movie.Type !== 'game').map(
             (movie) => {
                 const { Title, imdbID, Poster } = movie;
-                console.log(searchMovieData);
-
                 return (
                     <div
                         onClick={() => handleMovieClick(Title)}
@@ -39,7 +37,6 @@ export default function Movies({ searchMovieData }) {
     }
 
     const handleMovieClick = (title) => {
-        // console.log(SEARCHAPI + title);
         setSelectMovie(title);
     };
 
@@ -47,7 +44,7 @@ export default function Movies({ searchMovieData }) {
         <>
             <div id="movies">{!searchMovieData ? movieList : searchMovieList}</div>
 
-            <Modal title={selectMovie} />
+            {selectMovie && <Modal title={selectMovie} onClose={() => setSelectMovie(null)} />}
         </>
     );
 }
