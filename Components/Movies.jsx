@@ -16,6 +16,8 @@ export default function Movies({ searchMovieData }) {
         );
     });
 
+    console.log(selectMovie);
+
     let searchMovieList;
 
     if (searchMovieData && searchMovieData.Response === 'True') {
@@ -42,9 +44,11 @@ export default function Movies({ searchMovieData }) {
 
     return (
         <>
-            <div id="movies">{!searchMovieData ? movieList : searchMovieList}</div>
-
             {selectMovie && <Modal title={selectMovie} onClose={() => setSelectMovie(null)} />}
+
+            {selectMovie === null && (
+                <div id="movies">{!searchMovieData ? movieList : searchMovieList}</div>
+            )}
         </>
     );
 }

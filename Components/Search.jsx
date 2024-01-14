@@ -20,7 +20,6 @@ export default function SearchList({ searchMovieData }) {
                     setMovieName('');
                 }
             } catch (err) {
-                // console.error(err);
                 setError('An error occurred, try again later.');
             }
         }

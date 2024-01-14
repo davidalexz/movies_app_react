@@ -5,7 +5,6 @@ import { useState } from 'react';
 
 export default function App() {
     const [newData, setNewData] = useState(null);
-    // console.log(newData);
 
     return (
         <>
