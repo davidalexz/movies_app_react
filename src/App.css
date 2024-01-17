@@ -6,6 +6,7 @@
 
 body {
     font-family: 'Poppins', 'sans-serif';
+    height: 100vh;
     margin: 0;
     background-color: #fefefe;
 }
@@ -20,6 +21,7 @@ body {
     margin: 1rem;
     display: flex;
     flex-direction: column;
+    cursor: pointer;
 }
 
 .movie_poster,
@@ -53,20 +55,22 @@ input.search_movie::placeholder {
     color: #fefefe;
 }
 
-/* Modal  */
+/* ===== Modal ===== */
 
 .modal {
     position: relative;
     width: 60%;
-    height: 650px;
+    min-width: 750px;
+    height: fit-content;
     margin: 0 auto;
     box-shadow: 10px 10px 10px 10px rgba(2, 2, 2, 0.5);
 }
 
 .close_modal {
     position: absolute;
-    left: -20px;
-    top: -16px;
+    left: -12px;
+    top: -12px;
+    cursor: pointer;
 }
 
 .modal_main {
@@ -91,31 +95,27 @@ small.modal_genre {
 
 .modal_content {
     display: grid;
-    grid-template-columns: 300px auto;
+    grid-template-columns: 330px auto;
     grid-template-rows: 200px 300px;
 }
 
-img.modal_poster {
-    grid-column-start: 1;
-    grid-column-end: 2;
-    grid-row-start: 1;
-    grid-row-end: 2;
-}
-
-.about_movie {
-    grid-column: 2/3;
-    grid-row: 1/2;
-}
-
 .modal_cast {
-    grid-column: 2 /3;
-    align-self: end;
-    grid-row: 2/3;
     display: flex;
+    flex-direction: row;
     justify-content: space-between;
+    margin-top: 230px;
+}
+
+.modal_cast ul {
+    margin: 0;
+    padding: 0;
 }
 
 .modal_cast li {
     list-style: none;
     font-size: 0.8rem;
+}
+
+.modal_genre {
+    color: rgb(65, 65, 231);
 }

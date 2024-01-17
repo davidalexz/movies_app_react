@@ -21,7 +21,7 @@ export default function Modal({ title, onClose }) {
             {movieData && (
                 <div className="modal">
                     <button className="close_modal" onClick={onClose}>
-                        X
+                        <i class="fa-solid fa-x"></i>
                     </button>
                     <div className="modal_main">
                         <div className="modal_header">
@@ -39,28 +39,30 @@ export default function Modal({ title, onClose }) {
                                 className="modal_poster"
                             />
                             <div className="about_movie">
-                                <strong>About movie</strong>
-                                <p className="about_movie">{movieData.Plot}</p>
-                            </div>
-                            <div className="modal_cast">
-                                <ul className="director">
-                                    <strong>Director: </strong>
-                                    {movieData.Director.split(', ').map((director, index) => (
-                                        <li key={index}>{director}</li>
-                                    ))}
-                                </ul>
-                                <ul className="writers">
-                                    <strong>Writers: </strong>
-                                    {movieData.Writer.split(', ').map((writer, index) => (
-                                        <li key={index}>{writer}</li>
-                                    ))}
-                                </ul>
-                                <ul className="actors">
-                                    <strong>Actors: </strong>
-                                    {movieData.Actors.split(', ').map((actor, index) => (
-                                        <li key={index}>{actor}</li>
-                                    ))}
-                                </ul>
+                                <div className="intro_movie">
+                                    <strong>About movie</strong>
+                                    <p className="intro_text">{movieData.Plot}</p>
+                                </div>
+                                <div className="modal_cast">
+                                    <ul className="director">
+                                        <strong>Director: </strong>
+                                        {movieData.Director.split(', ').map((director, index) => (
+                                            <li key={index}>{director}</li>
+                                        ))}
+                                    </ul>
+                                    <ul className="writers">
+                                        <strong>Writers: </strong>
+                                        {movieData.Writer.split(', ').map((writer, index) => (
+                                            <li key={index}>{writer}</li>
+                                        ))}
+                                    </ul>
+                                    <ul className="actors">
+                                        <strong>Actors: </strong>
+                                        {movieData.Actors.split(', ').map((actor, index) => (
+                                            <li key={index}>{actor}</li>
+                                        ))}
+                                    </ul>
+                                </div>
                             </div>
                         </div>
                     </div>
