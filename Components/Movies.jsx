@@ -20,19 +20,15 @@ export default function Movies({ searchMovieData }) {
         movieList();
     }, []);
 
-    let movies = null;
+    let movies;
 
     if (startMovies !== null) {
         movies = startMovies.map((movie) => {
-            const { poster_path, original_title, id } = movie;
+            const { poster_path, title, id } = movie;
             return (
-                <div
-                    onClick={() => handleMovieClick(original_title)}
-                    className="movie_card"
-                    key={id}
-                >
+                <div onClick={() => handleMovieClick(title)} className="movie_card" key={id}>
                     <img className="movie_poster" src={IMGPATH + poster_path} alt="poster" />
-                    <h4 className="title">{original_title}</h4>
+                    <h4 className="title">{title}</h4>
                 </div>
             );
         });

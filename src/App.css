@@ -8,7 +8,7 @@ body {
     font-family: 'Poppins', 'sans-serif';
     height: 100vh;
     margin: 0;
-    background-color: #fefefe;
+    background-color: #555358;
 }
 #movies {
     display: flex;
@@ -17,47 +17,50 @@ body {
 }
 .movie_card,
 .searchMovies {
+    background-color: #7b7263;
     width: 250px;
     margin: 1rem;
     display: flex;
     flex-direction: column;
     cursor: pointer;
-}
-
-.movie_poster,
-.search_poster {
-    width: 100%;
-    border-top-left-radius: 5px;
-    border-top-right-radius: 5px;
+    -webkit-box-shadow: 2px 5px 20px -3px rgba(0, 0, 0, 0.52);
+    -moz-box-shadow: 2px 5px 20px -3px rgba(0, 0, 0, 0.52);
+    box-shadow: 2px 5px 20px -3px rgba(0, 0, 0, 0.52);
+    height: fit-content;
+    border-radius: 10px;
 }
 
 h4.title {
-    background-color: #32441e;
     margin: 0;
+    text-align: center;
+    padding: 5px;
 }
 
 input.search_movie {
-    background-color: #dabeca;
-    color: #fefefe;
+    background-color: #c9dcb3;
+    color: #555358;
     margin: 1rem auto;
     display: block;
-    padding: 5px;
-    width: 25%;
-    border-radius: 5px;
+    padding: 10px;
+    width: 500px;
+    border: none;
+    border-radius: 10px;
+    transition: background-color 0.3s ease-in-out;
 }
 
 input.search_movie:focus {
     outline: none;
-    background-color: bisque;
+    background-color: #c6ca53;
 }
 
 input.search_movie::placeholder {
-    color: #fefefe;
+    color: #555358;
 }
 
 /* ===== Modal ===== */
 
 .modal {
+    background-color: #7b7263;
     position: relative;
     width: 60%;
     min-width: 750px;
