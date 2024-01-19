@@ -62,8 +62,11 @@ input.search_movie::placeholder {
     width: 60%;
     min-width: 750px;
     height: fit-content;
-    margin: 0 auto;
-    box-shadow: 10px 10px 10px 10px rgba(2, 2, 2, 0.5);
+    margin: 100px auto;
+    border-radius: 10px;
+    -webkit-box-shadow: 2px 5px 20px -3px rgba(0, 0, 0, 0.52);
+    -moz-box-shadow: 2px 5px 20px -3px rgba(0, 0, 0, 0.52);
+    box-shadow: 2px 5px 20px -3px rgba(0, 0, 0, 0.52);
 }
 
 .close_modal {
@@ -74,7 +77,7 @@ input.search_movie::placeholder {
 }
 
 .modal_main {
-    padding: 30px;
+    padding: 25px;
 }
 
 h2 {
@@ -103,7 +106,7 @@ small.modal_genre {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    margin-top: 230px;
+    margin-top: 210px;
 }
 
 .modal_cast ul {
@@ -118,4 +121,28 @@ small.modal_genre {
 
 .modal_genre {
     color: rgb(65, 65, 231);
+}
+
+.modal_rating p {
+    display: inline;
+    color: rgb(65, 65, 231);
+}
+
+#loading {
+    width: 2rem;
+    height: 2rem;
+    border: 5px solid #f3f3f3;
+    border-top: 6px solid #9c41f2;
+    border-radius: 100%;
+    margin: auto;
+    animation: spin 1s infinite linear;
+}
+
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
 }

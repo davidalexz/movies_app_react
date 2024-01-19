@@ -1,22 +1,42 @@
-import testData from '../src/test_data.json';
 import { APIURL, IMGPATH, SEARCHAPI } from '../src/data';
 import Modal from './Modal';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 export default function Movies({ searchMovieData }) {
     const [selectMovie, setSelectMovie] = useState(null);
-    const movieList = testData.results.map((movie) => {
-        const { original_title, poster_path, id } = movie;
+    const [startMovies, setStartMovies] = useState(null);
 
-        return (
-            <div onClick={() => handleMovieClick(original_title)} className="movie_card" key={id}>
-                <img className="movie_poster" src={IMGPATH + poster_path} alt="poster" />
-                <h4 className="title">{original_title}</h4>
-            </div>
-        );
-    });
+    const movieList = async () => {
+        try {
+            const res = await fetch(APIURL);
+            const data = await res.json();
+            console.log(data.results);
+            setStartMovies(data.results);
+        } catch (error) {
+            console.error(error);
+        }
+    };
+    useEffect(() => {
+        movieList();
+    }, []);
 
-    console.log(selectMovie);
+    let movies = null;
+
+    if (startMovies !== null) {
+        movies = startMovies.map((movie) => {
+            const { poster_path, original_title, id } = movie;
+            return (
+                <div
+                    onClick={() => handleMovieClick(original_title)}
+                    className="movie_card"
+                    key={id}
+                >
+                    <img className="movie_poster" src={IMGPATH + poster_path} alt="poster" />
+                    <h4 className="title">{original_title}</h4>
+                </div>
+            );
+        });
+    }
 
     let searchMovieList;
 
@@ -47,7 +67,7 @@ export default function Movies({ searchMovieData }) {
             {selectMovie && <Modal title={selectMovie} onClose={() => setSelectMovie(null)} />}
 
             {selectMovie === null && (
-                <div id="movies">{!searchMovieData ? movieList : searchMovieList}</div>
+                <div id="movies">{!searchMovieData ? movies : searchMovieList}</div>
             )}
         </>
     );
