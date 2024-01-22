@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { APIURL, IMGPATH, SEARCHAPI } from '../src/data';
 
-export default function SearchList({ searchMovieData, onCloseModal }) {
+export default function SearchList({ searchMovieData }) {
     const [movieName, setMovieName] = useState('');
     const [error, setError] = useState(null);
 
@@ -18,7 +18,6 @@ export default function SearchList({ searchMovieData, onCloseModal }) {
                     searchMovieData(data);
                     setError(null);
                     setMovieName('');
-                    // onCloseModal();
                 }
             } catch (err) {
                 setError('An error occurred, try again later.');
@@ -29,7 +28,6 @@ export default function SearchList({ searchMovieData, onCloseModal }) {
     const handleKeyPres = (e) => {
         if (e.key === 'Enter') {
             fetchMovie();
-            searchMovieData(null);
         }
     };
 

@@ -5,6 +5,9 @@ import { useState, useEffect } from 'react';
 export default function Movies({ searchMovieData }) {
     const [selectMovie, setSelectMovie] = useState(null);
     const [startMovies, setStartMovies] = useState(null);
+    const [loading, setIsLoading] = useState(true);
+
+    console.log('Movies component rendered');
 
     const imgFail = 'https://www.brepols.net/files/product/cover.png';
 
@@ -18,18 +21,13 @@ export default function Movies({ searchMovieData }) {
             return null;
         }
     };
-    // useEffect(() => {
-    //     if (!startMovies) {
-    //         movieList(setStartMovies);
-    //     }
-    //     // movieList();
-    // }, [startMovies]);
 
     useEffect(() => {
         const fetchMovies = async () => {
             if (!startMovies) {
                 const movies = await movieList();
                 setStartMovies(movies);
+                setIsLoading(false);
             }
         };
         fetchMovies();
@@ -37,7 +35,7 @@ export default function Movies({ searchMovieData }) {
 
     let movies;
 
-    if (startMovies !== null) {
+    if (startMovies !== null && !loading) {
         movies = startMovies.map((movie) => {
             const { poster_path, title, id } = movie;
             return (
