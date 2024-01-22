@@ -10,14 +10,18 @@ export default function Modal({ title, onClose }) {
             try {
                 const res = await fetch(MOVIELINK + title);
                 const data = await res.json();
+
                 setSpinner(null);
                 setMovieData(data);
+                console.log(data);
             } catch (err) {
                 console.error(err);
             }
         };
         fetchMovie();
     }, [title]);
+
+    const imgFail = 'https://www.brepols.net/files/product/cover.png';
 
     return (
         <>
@@ -39,11 +43,11 @@ export default function Modal({ title, onClose }) {
                             </div>
 
                             <div className="modal_content">
-                                <img
-                                    src={movieData.Poster}
-                                    alt="modal_poster"
-                                    className="modal_poster"
-                                />
+                                {movieData.Poster ? (
+                                    <img src={movieData.Poster} className="modal_poster" />
+                                ) : (
+                                    <img src={imgFail} className="modal_poster" />
+                                )}
                                 <div className="about_movie">
                                     <div className="intro_movie">
                                         <strong>About movie</strong>

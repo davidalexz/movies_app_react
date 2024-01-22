@@ -6,19 +6,34 @@ export default function Movies({ searchMovieData }) {
     const [selectMovie, setSelectMovie] = useState(null);
     const [startMovies, setStartMovies] = useState(null);
 
+    const imgFail = 'https://www.brepols.net/files/product/cover.png';
+
     const movieList = async () => {
         try {
             const res = await fetch(APIURL);
             const data = await res.json();
-            console.log(data.results);
-            setStartMovies(data.results);
+            return data.results;
         } catch (error) {
             console.error(error);
+            return null;
         }
     };
+    // useEffect(() => {
+    //     if (!startMovies) {
+    //         movieList(setStartMovies);
+    //     }
+    //     // movieList();
+    // }, [startMovies]);
+
     useEffect(() => {
-        movieList();
-    }, []);
+        const fetchMovies = async () => {
+            if (!startMovies) {
+                const movies = await movieList();
+                setStartMovies(movies);
+            }
+        };
+        fetchMovies();
+    }, [startMovies]);
 
     let movies;
 
@@ -27,7 +42,7 @@ export default function Movies({ searchMovieData }) {
             const { poster_path, title, id } = movie;
             return (
                 <div onClick={() => handleMovieClick(title)} className="movie_card" key={id}>
-                    <img className="movie_poster" src={IMGPATH + poster_path} alt="poster" />
+                    <img className="movie_poster" src={IMGPATH + poster_path} alt="#" />
                     <h4 className="title">{title}</h4>
                 </div>
             );
@@ -46,7 +61,11 @@ export default function Movies({ searchMovieData }) {
                         className="searchMovies"
                         key={imdbID}
                     >
-                        <img src={Poster} alt="poster" className="movie_poster" />
+                        {Poster ? (
+                            <img src={Poster} className="movie_poster" />
+                        ) : (
+                            <img src={imgFail} className="movie_poster" />
+                        )}
                         <h4 className="title">{Title}</h4>
                     </div>
                 );
