@@ -31,7 +31,7 @@ export default function Modal({ title, onClose }) {
                 movieData && (
                     <div className="modal">
                         <button className="close_modal" onClick={onClose}>
-                            <i class="fa-solid fa-x"></i>
+                            <i className="fa-solid fa-x"></i>
                         </button>
                         <div className="modal_main">
                             <div className="modal_header">
