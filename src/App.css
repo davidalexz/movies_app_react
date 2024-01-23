@@ -62,7 +62,8 @@ input.search_movie::placeholder {
     color: #fafafa;
 }
 
-small.error {
+small.error,
+div.error-modal {
     color: rgb(241, 55, 55);
     display: block;
     text-align: center;

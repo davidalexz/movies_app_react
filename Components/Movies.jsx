@@ -99,7 +99,7 @@ export default function Movies({ searchMovieData }) {
     return (
         <>
             {selectMovie && <Modal title={selectMovie} onClose={() => setSelectMovie(null)} />}
-            {modalError && <div>Movie is not available</div>}
+            {modalError && <div className="error-modal">Movie is not available</div>}
 
             {selectMovie === null && (
                 <div id="movies">{!searchMovieData ? movies : searchMovieList}</div>
