@@ -38,6 +38,7 @@ export default function SearchList({ searchMovieData }) {
 
     return (
         <>
+            <button onClick={fetchMovie}>Search</button>
             <input
                 id="search-input"
                 value={movieName}
