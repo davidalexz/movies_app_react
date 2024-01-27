@@ -16,7 +16,7 @@ export default function App() {
     return (
         <>
             <button className="home-btn" onClick={handleHomeClick}>
-                <img src={logo} className="page-logo" alt="" srcset="" />
+                <img src={logo} className="page-logo" alt="logo" />
             </button>
             <Search searchMovieData={setNewData} />
             <Movies key={homeClicked} searchMovieData={newData} />

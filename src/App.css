@@ -33,7 +33,7 @@ body {
 }
 .movie_card,
 .searchMovies {
-    background-color: #213964;
+    background-color: #4caee3;
     border-radius: 5px;
     width: 250px;
     margin: 1rem;
@@ -42,6 +42,11 @@ body {
     cursor: pointer;
     box-shadow: 2px 5px 20px -3px rgba(0, 0, 0, 0.52);
     height: fit-content;
+}
+
+.movie_poster {
+    height: 370px;
+    object-fit: cover;
 }
 
 h4.title {
@@ -53,7 +58,7 @@ h4.title {
 }
 
 input.search_movie {
-    background-color: #213964;
+    background-color: #78c2ea;
     color: #fafafa;
     padding: 10px;
     width: 500px;
@@ -82,17 +87,21 @@ i.fa-magnifying-glass {
     transition: transform 0.3s ease-in-out;
 }
 
+.search-btn i {
+    color: #323232;
+}
+
 .search-btn:hover {
     transform: scale(1.15);
 }
 
 input.search_movie:focus {
     outline: none;
-    background-color: #594789;
+    background-color: #4caee3;
 }
 
 input.search_movie::placeholder {
-    color: #fafafa;
+    color: #323232;
     font-size: 1rem;
 }
 
@@ -107,7 +116,7 @@ div.error-modal {
 /* ===== Modal ===== */
 
 .modal {
-    background-color: #7b7263;
+    background-color: #cde8f7;
     position: relative;
     max-width: 850px;
     height: 650px;
