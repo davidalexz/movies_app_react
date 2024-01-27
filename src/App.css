@@ -61,7 +61,7 @@ input.search_movie {
     background-color: #78c2ea;
     color: #fafafa;
     padding: 10px;
-    width: 500px;
+    width: 50%;
     border: none;
     border-radius: 10px;
     transition: background-color 0.3s ease-in-out;
@@ -123,6 +123,9 @@ div.error-modal {
     margin: 100px auto;
     border-radius: 10px;
     box-shadow: 2px 5px 20px -3px rgba(0, 0, 0, 0.52);
+}
+.modal_header small.modal_rating p:last-child::after {
+    content: '/10';
 }
 
 .close_modal {
@@ -190,6 +193,8 @@ small.modal_genre {
     color: rgb(65, 65, 231);
 }
 
+/* ===== Loading spinner ===== */
+
 #loading {
     width: 2rem;
     height: 2rem;
@@ -206,5 +211,82 @@ small.modal_genre {
     }
     to {
         transform: rotate(360deg);
+    }
+}
+
+/* ===== Media queries ===== */
+
+@media screen and (max-width: 768px) {
+    .modal_poster {
+        width: fit-content;
+        height: fit-content;
+        margin: 5px auto;
+    }
+
+    .modal {
+        height: 100%;
+        width: 85%;
+        margin: 40px auto;
+        border-radius: 5px;
+    }
+
+    .modal_content {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .modal_cast {
+        margin-top: 0;
+    }
+
+    .modal_cast ul {
+        margin-top: 10px;
+    }
+
+    .modal_cast li {
+        margin-bottom: 5px;
+    }
+
+    .modal_header {
+        margin-bottom: 10px;
+    }
+
+    .modal_header h2 {
+        margin: 0 auto;
+        font-size: 1.2rem;
+    }
+
+    .modal_header small {
+        font-size: 0.8rem;
+    }
+
+    .modal_header small.modal_genre {
+        margin-top: 5px;
+    }
+
+    .modal_header small.modal_genre,
+    .modal_header small.modal_rating {
+        flex-basis: 100%;
+    }
+
+    .modal_header small.modal_rating {
+        margin: 5px;
+        text-align: center;
+    }
+
+    .modal_header small.modal_rating p:first-child {
+        margin-bottom: 5px;
+    }
+
+    .modal_header small.modal_rating p:last-child {
+        margin-top: 5px;
+    }
+
+    .modal_header small.modal_rating p:last-child::after {
+        content: '/10';
+    }
+
+    .modal_header small.modal_rating p:last-child span {
+        font-size: 0.8rem;
     }
 }
