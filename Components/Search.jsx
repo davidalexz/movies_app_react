@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { APIURL, IMGPATH, SEARCHAPI } from '../src/data';
+import { SEARCHAPI } from '../src/data';
 
 export default function SearchList({ searchMovieData }) {
     const [movieName, setMovieName] = useState('');
@@ -38,16 +38,21 @@ export default function SearchList({ searchMovieData }) {
 
     return (
         <>
-            <button onClick={fetchMovie}>Search</button>
-            <input
-                id="search-input"
-                value={movieName}
-                onChange={handleChange}
-                onKeyDown={handleKeyPres}
-                className="search_movie"
-                type="text"
-                placeholder="Search movie"
-            />
+            <div className="search-header">
+                <input
+                    id="search-input"
+                    value={movieName}
+                    onChange={handleChange}
+                    onKeyDown={handleKeyPres}
+                    className="search_movie"
+                    type="text"
+                    placeholder="Search movie"
+                />
+                <button className="search-btn" onClick={fetchMovie}>
+                    <i className="fa-solid fa-magnifying-glass"></i>
+                </button>
+            </div>
+
             <small className="error">{error}</small>
         </>
     );

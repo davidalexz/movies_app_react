@@ -100,7 +100,6 @@ export default function Movies({ searchMovieData }) {
         <>
             {selectMovie && <Modal title={selectMovie} onClose={() => setSelectMovie(null)} />}
             {modalError && <div className="error-modal">Movie is not available</div>}
-
             {selectMovie === null && (
                 <div id="movies">{!searchMovieData ? movies : searchMovieList}</div>
             )}

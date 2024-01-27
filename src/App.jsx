@@ -1,6 +1,7 @@
 import './App.css';
 import Movies from '../Components/Movies';
 import Search from '../Components/Search';
+import logo from './assets/movie-city-1.svg';
 import { useState } from 'react';
 
 export default function App() {
@@ -14,7 +15,9 @@ export default function App() {
 
     return (
         <>
-            <button onClick={handleHomeClick}>Home</button>
+            <button className="home-btn" onClick={handleHomeClick}>
+                <img src={logo} className="page-logo" alt="" srcset="" />
+            </button>
             <Search searchMovieData={setNewData} />
             <Movies key={homeClicked} searchMovieData={newData} />
         </>
