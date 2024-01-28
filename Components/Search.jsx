@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { SEARCHAPI } from '../src/data';
 
-export default function SearchList({ searchMovieData, setError, error }) {
+export default function SearchList({ searchMovieData, setError, error, onCloseModal }) {
     const [movieName, setMovieName] = useState('');
 
     const fetchMovie = async () => {
@@ -27,6 +27,7 @@ export default function SearchList({ searchMovieData, setError, error }) {
     const handleKeyPres = (e) => {
         if (e.key === 'Enter') {
             fetchMovie();
+            onCloseModal();
         }
     };
 
