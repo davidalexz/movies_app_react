@@ -1,9 +1,8 @@
 import { useState } from 'react';
 import { SEARCHAPI } from '../src/data';
 
-export default function SearchList({ searchMovieData }) {
+export default function SearchList({ searchMovieData, setError, error }) {
     const [movieName, setMovieName] = useState('');
-    const [error, setError] = useState(null);
 
     const fetchMovie = async () => {
         if (movieName) {
@@ -33,6 +32,7 @@ export default function SearchList({ searchMovieData }) {
 
     const handleChange = (e) => {
         e.preventDefault();
+        setError(null);
         setMovieName(e.target.value);
     };
 
@@ -52,7 +52,6 @@ export default function SearchList({ searchMovieData }) {
                     <i className="fa-solid fa-magnifying-glass"></i>
                 </button>
             </div>
-
             <small className="error">{error}</small>
         </>
     );

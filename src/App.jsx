@@ -7,6 +7,7 @@ import { useState } from 'react';
 export default function App() {
     const [newData, setNewData] = useState(null);
     const [homeClicked, setHomeClicked] = useState(false);
+    const [error, setError] = useState(null);
 
     const handleHomeClick = () => {
         setHomeClicked(!homeClicked);
@@ -18,8 +19,8 @@ export default function App() {
             <button className="home-btn" onClick={handleHomeClick}>
                 <img src={logo} className="page-logo" alt="logo" />
             </button>
-            <Search searchMovieData={setNewData} />
-            <Movies key={homeClicked} searchMovieData={newData} />
+            <Search searchMovieData={setNewData} setError={setError} error={error} />
+            <Movies error={error} setError={setError} key={homeClicked} searchMovieData={newData} />
         </>
     );
 }

@@ -36,7 +36,7 @@ body {
     background-color: #4caee3;
     border-radius: 5px;
     width: 250px;
-    margin: 1rem;
+    margin: 2rem 1.2rem;
     display: flex;
     flex-direction: column;
     cursor: pointer;
@@ -120,7 +120,7 @@ div.error-modal {
     position: relative;
     max-width: 850px;
     height: 650px;
-    margin: 100px auto;
+    margin: 2rem auto;
     border-radius: 10px;
     box-shadow: 2px 5px 20px -3px rgba(0, 0, 0, 0.52);
 }

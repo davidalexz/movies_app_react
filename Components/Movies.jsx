@@ -1,14 +1,12 @@
-import { APIURL, IMGPATH, SEARCHAPI, MOVIELINK } from '../src/data';
+import { APIURL, IMGPATH, MOVIELINK } from '../src/data';
 import Modal from './Modal';
 import { useState, useEffect, useMemo } from 'react';
 
-export default function Movies({ searchMovieData }) {
+export default function Movies({ searchMovieData, setError }) {
     const [selectMovie, setSelectMovie] = useState(null);
     const [startMovies, setStartMovies] = useState(null);
     const [loading, setLoading] = useState(true);
     const [modalError, setModalError] = useState(null);
-
-    console.log('Movies component rendered');
 
     const imgFail = 'https://www.brepols.net/files/product/cover.png';
 
@@ -85,10 +83,10 @@ export default function Movies({ searchMovieData }) {
             const res = await fetch(MOVIELINK + title);
             const data = await res.json();
             if (data.Response === 'False') {
-                setModalError('Movie info not available');
+                setError('Movie info not available');
                 throw new Error(`Movie not found: ${res.status}`);
             }
-            setModalError(null);
+            setError(null);
             setSelectMovie(title);
         } catch (error) {
             console.error(error);
@@ -99,7 +97,7 @@ export default function Movies({ searchMovieData }) {
     return (
         <>
             {selectMovie && <Modal title={selectMovie} onClose={() => setSelectMovie(null)} />}
-            {modalError && <div className="error-modal">Movie is not available</div>}
+            {/* {modalError && <div className="error-modal">Movie is not available</div>} */}
             {selectMovie === null && (
                 <div id="movies">{!searchMovieData ? movies : searchMovieList}</div>
             )}

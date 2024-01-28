@@ -10,7 +10,6 @@ export default function Modal({ title, onClose }) {
             try {
                 const res = await fetch(MOVIELINK + title);
                 const data = await res.json();
-
                 setSpinner(null);
                 setMovieData(data);
                 console.log(data);
