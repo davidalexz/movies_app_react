@@ -1,112 +1,104 @@
-import { APIURL, IMGPATH, MOVIELINK } from "../src/data";
-import Modal from "./Modal";
-import { useState, useEffect, useMemo } from "react";
+import { APIURL, IMGPATH, MOVIELINK } from '../src/data';
+import Modal from './Modal';
+import { useState, useEffect, useMemo } from 'react';
 
-export default function Movies({ searchMovieData, setError }) {
-  const [selectMovie, setSelectMovie] = useState(null);
-  const [startMovies, setStartMovies] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const [modalError, setModalError] = useState(null);
+export default function Movies({ searchMovieData, setError, selectMovie, setSelectMovie }) {
+    // const [selectMovie, setSelectMovie] = useState(null);
+    const [startMovies, setStartMovies] = useState(null);
+    const [loading, setLoading] = useState(true);
 
-  const imgFail = "https://www.brepols.net/files/product/cover.png";
+    const imgFail = 'https://www.brepols.net/files/product/cover.png';
 
-  const movieList = async () => {
-    try {
-      const res = await fetch(APIURL);
-      const data = await res.json();
-      return data.results;
-    } catch (error) {
-      console.error(error);
-      return null;
-    }
-  };
-
-  const memoizedMovieList = useMemo(() => movieList(), []);
-
-  useEffect(() => {
-    const fetchMovies = async () => {
-      if (!startMovies) {
+    const movieList = async () => {
         try {
-          const movies = await movieList();
-          setStartMovies(movies);
+            const res = await fetch(APIURL);
+            const data = await res.json();
+            return data.results;
         } catch (error) {
-          console.error(error);
-        } finally {
-          setLoading(false);
+            console.error(error);
+            return null;
         }
-      }
     };
 
-    fetchMovies();
-  }, [startMovies, memoizedMovieList]);
+    const memoizedMovieList = useMemo(() => movieList(), []);
 
-  let movies;
+    useEffect(() => {
+        const fetchMovies = async () => {
+            if (!startMovies) {
+                try {
+                    const movies = await movieList();
+                    setStartMovies(movies);
+                } catch (error) {
+                    console.error(error);
+                } finally {
+                    setLoading(false);
+                }
+            }
+        };
 
-  if (startMovies !== null && !loading) {
-    movies = startMovies.map((movie) => {
-      const { poster_path, title, id } = movie;
-      return (
-        <div
-          onClick={() => handleMovieClick(title)}
-          className="movie_card"
-          key={id}
-        >
-          <img className="movie_poster" src={IMGPATH + poster_path} alt="#" />
-          <h4 className="title">{title}</h4>
-        </div>
-      );
-    });
-  }
+        fetchMovies();
+    }, [startMovies, memoizedMovieList]);
 
-  let searchMovieList;
+    let movies;
 
-  if (searchMovieData && searchMovieData.Response === "True") {
-    searchMovieList = searchMovieData.Search.filter(
-      (movie) => movie.Type !== "game",
-    ).map((movie) => {
-      const { Title, imdbID, Poster } = movie;
-      return (
-        <div
-          onClick={() => handleMovieClick(Title)}
-          className="searchMovies"
-          key={imdbID}
-        >
-          {Poster ? (
-            <img src={Poster} className="movie_poster" />
-          ) : (
-            <img src={imgFail} className="movie_poster" />
-          )}
-          <h4 className="title">{Title}</h4>
-        </div>
-      );
-    });
-  }
-
-  const handleMovieClick = async (title) => {
-    try {
-      const res = await fetch(MOVIELINK + title);
-      const data = await res.json();
-      if (data.Response === "False") {
-        setError("Movie info not available");
-        throw new Error(`Movie not found: ${res.status}`);
-      }
-      setError(null);
-      setSelectMovie(title);
-    } catch (error) {
-      console.error(error);
-      setSelectMovie(null);
+    if (startMovies !== null && !loading) {
+        movies = startMovies.map((movie) => {
+            const { poster_path, title, id } = movie;
+            return (
+                <div onClick={() => handleMovieClick(title)} className="movie_card" key={id}>
+                    <img className="movie_poster" src={IMGPATH + poster_path} alt="#" />
+                    <h4 className="title">{title}</h4>
+                </div>
+            );
+        });
     }
-  };
 
-  return (
-    <>
-      {selectMovie && (
-        <Modal title={selectMovie} onClose={() => setSelectMovie(null)} />
-      )}
-      {/* {modalError && <div className="error-modal">Movie is not available</div>} */}
-      {selectMovie === null && (
-        <div id="movies">{!searchMovieData ? movies : searchMovieList}</div>
-      )}
-    </>
-  );
+    let searchMovieList;
+
+    if (searchMovieData && searchMovieData.Response === 'True') {
+        searchMovieList = searchMovieData.Search.filter((movie) => movie.Type !== 'game').map(
+            (movie) => {
+                const { Title, imdbID, Poster } = movie;
+                return (
+                    <div
+                        onClick={() => handleMovieClick(Title)}
+                        className="searchMovies"
+                        key={imdbID}
+                    >
+                        {Poster ? (
+                            <img src={Poster} className="movie_poster" />
+                        ) : (
+                            <img src={imgFail} className="movie_poster" />
+                        )}
+                        <h4 className="title">{Title}</h4>
+                    </div>
+                );
+            }
+        );
+    }
+
+    const handleMovieClick = async (title) => {
+        try {
+            const res = await fetch(MOVIELINK + title);
+            const data = await res.json();
+            if (data.Response === 'False') {
+                setError('Movie info not available');
+                throw new Error(`Movie not found: ${res.status}`);
+            }
+            setError(null);
+            setSelectMovie(title);
+        } catch (error) {
+            console.error(error);
+            setSelectMovie(null);
+        }
+    };
+
+    return (
+        <>
+            {selectMovie && <Modal title={selectMovie} onClose={() => setSelectMovie(null)} />}
+            {selectMovie === null && (
+                <div id="movies">{!searchMovieData ? movies : searchMovieList}</div>
+            )}
+        </>
+    );
 }

@@ -7,11 +7,13 @@ import { useState } from 'react';
 export default function App() {
     const [newData, setNewData] = useState(null); //store result from movie search
     const [homeClicked, setHomeClicked] = useState(false);
+    const [selectMovie, setSelectMovie] = useState(null); //lifted state from Movies so that we can also pass it to Search in handleKeyPres function for error handling
     const [error, setError] = useState(null);
 
     const handleHomeClick = () => {
         setHomeClicked(!homeClicked);
         setNewData(null);
+        setSelectMovie(null);
     };
 
     return (
@@ -24,8 +26,16 @@ export default function App() {
                 setError={setError}
                 error={error}
                 onCloseModal={handleHomeClick}
+                setSelectMovie={setSelectMovie}
             />
-            <Movies error={error} setError={setError} key={homeClicked} searchMovieData={newData} />
+            <Movies
+                error={error}
+                setError={setError}
+                key={homeClicked}
+                searchMovieData={newData}
+                selectMovie={selectMovie}
+                setSelectMovie={setSelectMovie}
+            />
         </>
     );
 }
