@@ -2,7 +2,13 @@ import { APIURL, IMGPATH, MOVIELINK } from '../src/data';
 import Modal from './Modal';
 import { useState, useEffect } from 'react';
 
-export default function Movies({ searchMovieData, setError, selectMovie, setSelectMovie }) {
+export default function Movies({
+    searchMovieData,
+    setError,
+    selectMovie,
+    setSelectMovie,
+    isSearching,
+}) {
     const [getMovies, setGetMovies] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
     const [loading, setLoading] = useState(true);
@@ -66,7 +72,11 @@ export default function Movies({ searchMovieData, setError, selectMovie, setSele
                         className="searchMovies"
                         key={index}
                     >
-                        <img src={Poster} className="movie_poster" />
+                        <div className="img-container">
+                            {' '}
+                            <img src={Poster} className="movie_poster" />
+                        </div>
+
                         <h4 className="title">{Title}</h4>
                     </div>
                 );
@@ -95,7 +105,7 @@ export default function Movies({ searchMovieData, setError, selectMovie, setSele
         <>
             {selectMovie && <Modal title={selectMovie} onClose={() => setSelectMovie(null)} />}
             {selectMovie === null && (
-                <div id="movies">{!searchMovieData ? movies : searchMovieList}</div>
+                <div id="movies">{!isSearching && !searchMovieData ? movies : searchMovieList}</div>
             )}
             {!selectMovie && (
                 <div className="load-more">

@@ -1,7 +1,13 @@
 import { useState } from 'react';
 import { SEARCHAPI } from '../src/data';
 
-export default function SearchList({ searchMovieData, setError, error, setSelectMovie }) {
+export default function SearchList({
+    searchMovieData,
+    setError,
+    error,
+    setSelectMovie,
+    setIsSearching,
+}) {
     const [movieName, setMovieName] = useState('');
 
     const fetchMovie = async () => {
@@ -10,6 +16,7 @@ export default function SearchList({ searchMovieData, setError, error, setSelect
                 const res = await fetch(SEARCHAPI + movieName);
                 const data = await res.json();
                 if ((data.Response === 'False') & (data.Error === 'Movie not found!')) {
+                    setIsSearching(false);
                     setMovieName('');
                     setError('Movie not found');
                 } else {
@@ -25,6 +32,7 @@ export default function SearchList({ searchMovieData, setError, error, setSelect
 
     const handleKeyPres = (e) => {
         if (e.key === 'Enter') {
+            setIsSearching(true);
             fetchMovie();
             setSelectMovie(null);
         }

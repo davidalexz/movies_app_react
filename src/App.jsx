@@ -8,6 +8,7 @@ export default function App() {
     const [newData, setNewData] = useState(null); //store result from movie search
     const [homeClicked, setHomeClicked] = useState(false);
     const [selectMovie, setSelectMovie] = useState(null); //lifted state from Movies so that we can also pass it to Search in handleKeyPres function for error handling
+    const [isSearching, setIsSearching] = useState(false);
     const [error, setError] = useState(null);
 
     const handleHomeClick = () => {
@@ -27,6 +28,7 @@ export default function App() {
                 error={error}
                 onCloseModal={handleHomeClick}
                 setSelectMovie={setSelectMovie}
+                setIsSearching={setIsSearching}
             />
             <Movies
                 error={error}
@@ -35,6 +37,7 @@ export default function App() {
                 searchMovieData={newData}
                 selectMovie={selectMovie}
                 setSelectMovie={setSelectMovie}
+                isSearching={isSearching}
             />
         </>
     );
