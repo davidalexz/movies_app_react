@@ -43,11 +43,21 @@ body {
     cursor: pointer;
     box-shadow: 2px 5px 20px -3px rgba(0, 0, 0, 0.52);
     height: fit-content;
+    transition: 0.3s;
+}
+.img-container {
+    height: 370px;
+    overflow: hidden;
 }
 
 .movie_poster {
-    height: 370px;
-    object-fit: cover;
+    height: 100%;
+    width: 100%;
+    transition: transform 0.3s ease;
+}
+
+.movie_poster:hover {
+    transform: scale3d(1.1, 1.1, 1.1);
 }
 
 h4.title {
@@ -213,6 +223,25 @@ small.modal_genre {
     to {
         transform: rotate(360deg);
     }
+}
+
+/*Load more movies */
+.load-more {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 1.5rem 0;
+}
+
+.load-movies {
+    padding: 11px 35px;
+    border-radius: 5px;
+    border: none;
+    background-color: #4caee3;
+    color: #fafafa;
+    cursor: pointer;
+    opacity: 0.9;
+    font-size: 1rem;
 }
 
 /* ===== Media queries ===== */

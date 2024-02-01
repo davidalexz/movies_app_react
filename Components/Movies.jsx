@@ -1,17 +1,15 @@
 import { APIURL, IMGPATH, MOVIELINK } from '../src/data';
 import Modal from './Modal';
-import { useState, useEffect, useMemo } from 'react';
+import { useState, useEffect } from 'react';
 
 export default function Movies({ searchMovieData, setError, selectMovie, setSelectMovie }) {
-    // const [selectMovie, setSelectMovie] = useState(null);
-    const [startMovies, setStartMovies] = useState(null);
+    const [getMovies, setGetMovies] = useState([]);
+    const [currentPage, setCurrentPage] = useState(1);
     const [loading, setLoading] = useState(true);
-
-    const imgFail = 'https://www.brepols.net/files/product/cover.png';
 
     const movieList = async () => {
         try {
-            const res = await fetch(APIURL);
+            const res = await fetch(APIURL + currentPage);
             const data = await res.json();
             return data.results;
         } catch (error) {
@@ -20,62 +18,62 @@ export default function Movies({ searchMovieData, setError, selectMovie, setSele
         }
     };
 
-    const memoizedMovieList = useMemo(() => movieList(), []);
+    //ANCHOR - need to fix fetchMovies function or create a new one for the APIURL to increment pagination number for the new movies
 
+    const fetchMovies = async () => {
+        try {
+            const moviesList = await movieList();
+            setGetMovies((prevMovies) => [...prevMovies, ...moviesList]);
+            setCurrentPage((prevPage) => prevPage + 1);
+            console.log(currentPage);
+        } catch (error) {
+            console.error(error);
+        } finally {
+            setLoading(false);
+        }
+    };
     useEffect(() => {
-        const fetchMovies = async () => {
-            if (!startMovies) {
-                try {
-                    const movies = await movieList();
-                    setStartMovies(movies);
-                } catch (error) {
-                    console.error(error);
-                } finally {
-                    setLoading(false);
-                }
-            }
-        };
-
         fetchMovies();
-    }, [startMovies, memoizedMovieList]);
+    }, []);
 
     let movies;
 
-    if (startMovies !== null && !loading) {
-        movies = startMovies.map((movie) => {
-            const { poster_path, title, id } = movie;
+    if (getMovies !== null && !loading) {
+        movies = getMovies.map((movie, index) => {
+            const { poster_path, title } = movie;
             return (
-                <div onClick={() => handleMovieClick(title)} className="movie_card" key={id}>
-                    <img className="movie_poster" src={IMGPATH + poster_path} alt="#" />
+                <div onClick={() => handleMovieClick(title)} className="movie_card" key={index}>
+                    <div className="img-container">
+                        <img className="movie_poster" src={IMGPATH + poster_path} alt="#" />
+                    </div>
+
                     <h4 className="title">{title}</h4>
                 </div>
             );
         });
     }
 
+    //For movie search
     let searchMovieList;
 
     if (searchMovieData && searchMovieData.Response === 'True') {
         searchMovieList = searchMovieData.Search.filter((movie) => movie.Type !== 'game').map(
-            (movie) => {
-                const { Title, imdbID, Poster } = movie;
+            (movie, index) => {
+                const { Title, Poster } = movie;
                 return (
                     <div
                         onClick={() => handleMovieClick(Title)}
                         className="searchMovies"
-                        key={imdbID}
+                        key={index}
                     >
-                        {Poster ? (
-                            <img src={Poster} className="movie_poster" />
-                        ) : (
-                            <img src={imgFail} className="movie_poster" />
-                        )}
+                        <img src={Poster} className="movie_poster" />
                         <h4 className="title">{Title}</h4>
                     </div>
                 );
             }
         );
     }
+    //For Modal data-title
 
     const handleMovieClick = async (title) => {
         try {
@@ -98,6 +96,13 @@ export default function Movies({ searchMovieData, setError, selectMovie, setSele
             {selectMovie && <Modal title={selectMovie} onClose={() => setSelectMovie(null)} />}
             {selectMovie === null && (
                 <div id="movies">{!searchMovieData ? movies : searchMovieList}</div>
+            )}
+            {!selectMovie && (
+                <div className="load-more">
+                    <button className="load-movies" onClick={fetchMovies}>
+                        Load more
+                    </button>
+                </div>
             )}
         </>
     );
