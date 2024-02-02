@@ -1,6 +1,6 @@
-import { APIURL, IMGPATH, MOVIELINK } from '../src/data';
+import { IMGPATH, MOVIELINK } from '../src/data';
 import Modal from './Modal';
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 
 export default function Movies({
     searchMovieData,
@@ -8,36 +8,10 @@ export default function Movies({
     selectMovie,
     setSelectMovie,
     isSearching,
+    getMovies,
+    fetchMovies,
+    loading,
 }) {
-    const [getMovies, setGetMovies] = useState([]);
-    const [currentPage, setCurrentPage] = useState(1);
-    const [loading, setLoading] = useState(true);
-
-    const movieList = async () => {
-        try {
-            const res = await fetch(APIURL + currentPage);
-            const data = await res.json();
-            return data.results;
-        } catch (error) {
-            console.error(error);
-            return null;
-        }
-    };
-
-    //ANCHOR - need to fix fetchMovies function or create a new one for the APIURL to increment pagination number for the new movies
-
-    const fetchMovies = async () => {
-        try {
-            const moviesList = await movieList();
-            setGetMovies((prevMovies) => [...prevMovies, ...moviesList]);
-            setCurrentPage((prevPage) => prevPage + 1);
-            console.log(currentPage);
-        } catch (error) {
-            console.error(error);
-        } finally {
-            setLoading(false);
-        }
-    };
     useEffect(() => {
         fetchMovies();
     }, []);

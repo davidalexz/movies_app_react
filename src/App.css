@@ -225,7 +225,8 @@ small.modal_genre {
     }
 }
 
-/*Load more movies */
+/* ==== Load more movies ==== */
+
 .load-more {
     display: flex;
     justify-content: center;
