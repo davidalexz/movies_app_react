@@ -47,7 +47,6 @@ export default function Movies({
                         key={index}
                     >
                         <div className="img-container">
-                            {' '}
                             <img src={Poster} className="movie_poster" />
                         </div>
 

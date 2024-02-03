@@ -24,7 +24,7 @@ body {
 }
 
 .page-logo {
-    width: 150px;
+    width: 120px;
 }
 
 #movies {
@@ -36,7 +36,7 @@ body {
 .searchMovies {
     background-color: #4caee3;
     border-radius: 5px;
-    width: 250px;
+    width: 230px;
     margin: 2rem 1.25rem;
     display: flex;
     flex-direction: column;
@@ -72,7 +72,7 @@ input.search_movie {
     background-color: #78c2ea;
     color: #fafafa;
     padding: 10px;
-    width: 30%;
+    width: 40%;
     border: none;
     border-radius: 10px;
     transition: background-color 0.3s ease-in-out;
@@ -134,9 +134,6 @@ div.error-modal {
     margin: 2rem auto;
     border-radius: 10px;
     box-shadow: 2px 5px 20px -3px rgba(0, 0, 0, 0.52);
-}
-.modal_header small.modal_rating p:last-child::after {
-    content: '/10';
 }
 
 .close_modal {
@@ -311,10 +308,6 @@ small.modal_genre {
 
     .modal_header small.modal_rating p:last-child {
         margin-top: 5px;
-    }
-
-    .modal_header small.modal_rating p:last-child::after {
-        content: '/10';
     }
 
     .modal_header small.modal_rating p:last-child span {

@@ -35,9 +35,15 @@ export default function Modal({ title, onClose }) {
                         <div className="modal_main">
                             <div className="modal_header">
                                 <h2 className="modal_title">{movieData.Title}</h2>
-                                <small className="modal_rating">
-                                    imdb Rating: <p>{movieData.imdbRating}</p>
-                                </small>
+                                {movieData.imdbRating === 'N/A' ? (
+                                    <small className="modal_rating">
+                                        imdb Rating: <p>N/A</p>
+                                    </small>
+                                ) : (
+                                    <small className="modal_rating">
+                                        imdb Rating: <p>{movieData.imdbRating} / 10</p>
+                                    </small>
+                                )}
                                 <small className="modal_genre">{movieData.Genre}</small>
                             </div>
 
