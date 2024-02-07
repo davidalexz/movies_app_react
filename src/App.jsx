@@ -28,8 +28,6 @@ export default function App() {
         }
     };
 
-    //FIXME - when clicking the home button in Search screen - movies are not loaded
-
     const movieList = async () => {
         try {
             const res = await fetch(APIURL + currentPage);
